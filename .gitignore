@@ -1,5 +1,6 @@
 venv
 .vscode
-__pycache__
+__pycache__/
 REST api with Flask.code-workspace
 data.db
+*.pyc
