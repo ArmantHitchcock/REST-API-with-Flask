@@ -6,6 +6,7 @@ from models.item import ItemModel
 class Item(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('price', type=float, required=True, help='This field can not be left blank')
+    parser.add_argument('store_id', type=int, required=True, help='every item needs a store id')
         
     @jwt_required()    # now required to authenticate before route func is executed
     def get(self, name):
@@ -19,7 +20,7 @@ class Item(Resource):
         if ItemModel.find_by_name(name):
             return{'message':"An item with the name '{}' already exists.".format(name)}, 400 # request error
         data = Item.parser.parse_args()
-        item = ItemModel(name, data['price'])
+        item = ItemModel(name, data['price'], data['store_id']) # alternative: item = ItemModel(name, **data)
         try:
             item.save_to_db()
         except:
@@ -45,9 +46,10 @@ class Item(Resource):
         data = Item.parser.parse_args()
         item = ItemModel.find_by_name(name)
         if item is None:
-            item = ItemModel(name, data['price'])
+            item = ItemModel(name, data['price'], data['store_id']) # alternative: item = ItemModel(name, **data)
         else:
             item.price = data['price']
+            item.store_id = data['store_id']
         item.save_to_db()
         return item.json()
 
