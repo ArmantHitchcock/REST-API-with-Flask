@@ -28,7 +28,7 @@ api.add_resource(Item, '/item/<string:name>')   # CRUD for items
 api.add_resource(ItemList, '/items')            # returns a list of all the items
 api.add_resource(StoreList, '/stores')          # returns a list of all the stores
 api.add_resource(UserRegister, '/register')     # register a new user
-
+#test
 # only runs app if this file is run, and not if it is run through import
 if __name__ == '__main__':
     db.init_app(app)
