@@ -18,17 +18,13 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'jose'  # shouldn't be visible in production
 api = Api(app)
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
-
 jwt = JWT(app, authenticate, identity)          # creates a new end point /auth
 api.add_resource(Store, '/store/<string:name>') # CRD for stores
 api.add_resource(Item, '/item/<string:name>')   # CRUD for items
 api.add_resource(ItemList, '/items')            # returns a list of all the items
 api.add_resource(StoreList, '/stores')          # returns a list of all the stores
 api.add_resource(UserRegister, '/register')     # register a new user
-#test
+
 # only runs app if this file is run, and not if it is run through import
 if __name__ == '__main__':
     db.init_app(app)
