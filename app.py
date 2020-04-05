@@ -1,6 +1,6 @@
 import os
 from db import db
-from flask import Flask
+from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from resources.user import UserRegister, User, UserLogin, UserLogout, TokenRefresh
@@ -14,7 +14,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.config['JWT_BLACKLIST_ENABLED'] = True
 app.config['JWT_BALCKLIST_TOKEN_CHECKS'] = ['access', 'refresh']
-app.config['JWT_SECRET_KEY']
+app.secret_key = 'jose' #app.config['JWT_SECRET_KEY']
 api = Api(app)
 
 jwt = JWTManager(app)
