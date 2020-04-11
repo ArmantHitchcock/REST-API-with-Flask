@@ -9,7 +9,7 @@ from resources.store import Store, StoreList
 from blacklist import BLACKLIST
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')     #sqlite can be changed to another sql db system
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')     #sqlite can be changed to another sql db system
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.config['JWT_BLACKLIST_ENABLED'] = True
